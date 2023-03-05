@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
-import GithubAuth from "./GithubAuth";
-import { ReposList } from "./types";
+import GithubAuth from "./src/GithubAuth";
+import { ReposList } from "./src/types";
 
 //Importing environment variables
 dotenv.config();
