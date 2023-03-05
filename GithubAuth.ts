@@ -2,6 +2,7 @@ import { Octokit } from "octokit";
 import {
   GetReposForAuthenticatedUserResponse,
   GetResponseForReposList,
+  ReposList,
 } from "./types";
 
 export default class GithubAuth {
@@ -18,28 +19,32 @@ export default class GithubAuth {
   //Method to get list of repos for authenticated user
   static async getReposList(
     AuthUserInstance: GithubAuth
-  ): Promise<GetResponseForReposList | Error> {
+  ): Promise<ReposList[] | Error> {
+    //Response from API
     let response: GetReposForAuthenticatedUserResponse | Error;
-    let ReposList: GetResponseForReposList = [];
+
+    //Array to store list of repos
+    let ReposList: ReposList[] = [];
+
+    //Calling API
     try {
       response =
         await AuthUserInstance.octokit.rest.repos.listForAuthenticatedUser();
+
+      //Storing data in ReposList
       response.data.forEach((repo, i) => {
-        ReposList.push(items);
-        items;
-        ({
-          id: i,
+        ReposList[i] = {
+          id: repo.id,
           name: repo.name,
           description: repo.description,
           url: repo.html_url,
-        });
-        i++;
+        };
       });
     } catch (error) {
       response = error as Error;
     }
-    //response
 
+    //Returning response (an Error or an array of ReposList)
     return ReposList;
   }
 }

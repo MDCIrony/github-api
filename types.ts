@@ -7,10 +7,10 @@ export type GetReposForAuthenticatedUserParameters =
   RestEndpointMethodTypes["repos"]["listForAuthenticatedUser"]["parameters"];
 
 // Types for get responses
-interface ReposList {
+export interface ReposList {
   id: number;
   name: string;
-  description: string;
+  description: string | null;
   url: string;
 }
 export interface GetResponseForReposList {
